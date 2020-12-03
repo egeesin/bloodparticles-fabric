@@ -9,6 +9,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Mixin class for injecting {@link DamageLivingEntityCallback} into LivingEntity on damage()
+ */
 @Mixin(LivingEntity.class)
 public class DamageLivingEntityMixin {
     @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z",

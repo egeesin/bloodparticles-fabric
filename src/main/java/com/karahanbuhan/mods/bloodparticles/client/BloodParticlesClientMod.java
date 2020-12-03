@@ -6,9 +6,24 @@ import net.fabricmc.api.ClientModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Represents the Blood Particles core
+ */
 public class BloodParticlesClientMod implements ClientModInitializer {
     private static Logger logger;
 
+    /**
+     * Static class cannot be initialized
+     */
+    private BloodParticlesClientMod() {
+        logger().warn("What have you done?");
+    }
+
+    /**
+     * Called when fabric initializes Blood Particles
+     *
+     * This method exists only for now because we use Fabric API
+     */
     @Override
     public void onInitializeClient() {
         DamageLivingEntityCallback.EVENT.register(new DamageLivingEntityListener());
@@ -19,7 +34,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      *
      * @return Logger associated with this mod
      */
-    public static Logger getLogger() {
+    public static Logger logger() {
         if (logger == null)
             logger = LogManager.getLogger("Blood Particles");
 
