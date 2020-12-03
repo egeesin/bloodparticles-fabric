@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public class DamageLivingEntityMixin {
-    @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"),
+    @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"),
             cancellable = true)
     private void onDamageLivingEntity(DamageSource source, float amount, final CallbackInfoReturnable<Boolean> info) {
         ActionResult result = DamageLivingEntityCallback.EVENT.invoker().interact((LivingEntity) (Object) this, source, amount);
@@ -21,5 +21,4 @@ public class DamageLivingEntityMixin {
             info.cancel();
         }
     }
-
 }

@@ -21,8 +21,7 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
 
         for (int i = 0; i < amount * 15; i++)
             renderer.addParticle(effect, false, position.x, position.y + entity.getHeight() / 1.5, position.z, 0, 0, 0);
-
-
+        
         return ActionResult.PASS;
     }
 }
