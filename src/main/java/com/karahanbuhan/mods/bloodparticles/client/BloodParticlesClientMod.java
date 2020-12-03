@@ -1,5 +1,7 @@
 package com.karahanbuhan.mods.bloodparticles.client;
 
+import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
+import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
 import net.fabricmc.api.ClientModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +11,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
+        DamageLivingEntityCallback.EVENT.register(new DamageLivingEntityListener());
     }
 
     /**
