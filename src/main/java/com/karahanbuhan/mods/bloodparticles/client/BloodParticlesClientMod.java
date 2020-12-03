@@ -21,7 +21,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      */
     public static Logger getLogger() {
         if (logger == null)
-            logger = LogManager.getLogger("BloodParticles");
+            logger = LogManager.getLogger("Blood Particles");
 
         return logger;
     }
