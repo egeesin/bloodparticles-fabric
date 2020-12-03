@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "bloodparticles",
+  "version": "${version}",
+  "name": "Blood Particles",
+  "description": "Blood Particles is a client-side feature mod for Minecraft which adds configurable blood particles.",
+  "authors": [
+    "Karahan Buhan"
+  ],
+  "contact": {
+    "homepage": "https://karahanbuhan.com",
+    "sources": "https://github.com/karahanbuhan/bloodparticles-fabric"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/modid/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.karahanbuhan.mods.bloodparticles.client.BloodParticlesClientMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.8.0",
+    "fabric": "*"
+  },
+  "mixins": [
+    "bloodparticles.mixins.json"
+  ]
+}
