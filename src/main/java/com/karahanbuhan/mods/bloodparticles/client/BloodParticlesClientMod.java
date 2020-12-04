@@ -38,7 +38,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      *
      * @return Config associated with this mod
      */
-    private static Configuration getConfig() {
+    public static Configuration getConfig() {
         if (config == null) // Initialize the config if it does not exist/loaded yet
             try {
                 config = new Configuration("bloodparticles.cfg",
