@@ -23,7 +23,7 @@ public class Configuration {
      * @param name Name of the field
      * @return The field matching name, if there is none; method will return null
      */
-    private BaseField getFieldByName(String name) {
+    public BaseField getFieldByName(String name) {
         return fieldSet.stream()
                 .findFirst()
                 .filter(field -> field.getName().equals(name))
