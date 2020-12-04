@@ -29,7 +29,10 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         Vec3d position = entity.getPos();
         ParticleEffect effect = new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.REDSTONE_BLOCK.getDefaultState());
 
-        for (int i = 0; i < amount * BloodParticlesClientMod.getBloodMultiplier(); i++)
+        // If multiplier times amount exceeds limit, use the particle limit
+        double particleAmount = Math.min(BloodParticlesClientMod.getBloodMultiplier() * amount, BloodParticlesClientMod.getParticleLimit());
+
+        for (int i = 0; i < particleAmount; i++)
             renderer.addParticle(effect, false, position.x, position.y + entity.getHeight() / 1.5, position.z, 0, 0, 0);
 
         return ActionResult.PASS;
