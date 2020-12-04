@@ -171,7 +171,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      */
     public static boolean isDamageSourceEnabled(String source) {
         HashMultimap<ReferenceVariables, String> map = HashMultimap.create(); // There may be duplicate keys so we use Multimap
-        map.put(BLOOD_WHEN_ATTACK, "string");
+        map.put(BLOOD_WHEN_ATTACK, "sting");
         map.put(BLOOD_WHEN_ATTACK, "mob");
         map.put(BLOOD_WHEN_ATTACK, "player");
         map.put(BLOOD_WHEN_CACTUS, "cactus");
