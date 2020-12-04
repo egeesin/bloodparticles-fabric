@@ -22,7 +22,7 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         if (!BloodParticlesClientMod.isEnabled())
             return ActionResult.PASS; // Return if the particles are not enabled
 
-        if (BloodParticlesClientMod.isDamageSourceEnabled(source.name))
+        if (!BloodParticlesClientMod.isDamageSourceEnabled(source.name))
             return ActionResult.PASS; // Return if the damage source is not enabled in config
 
         // Did you know that dust particles crash the game?
