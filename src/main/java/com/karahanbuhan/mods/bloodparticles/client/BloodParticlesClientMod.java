@@ -8,6 +8,10 @@ import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.entity.EntityType;
+import net.minecraft.particle.*;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -79,7 +83,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new BooleanField(BLOOD_WHEN_WITHER.name, BLOOD_WHEN_WITHER.description, true),
 
                         new StringField(DEFAULT_PARTICLE.name, DEFAULT_PARTICLE.description, "minecraft:block minecraft:redstone_block"),
-                        new StringField(BLAZE_PARTICLE.name, BLAZE_PARTICLE.description, "minecraft:particle"),
+                        new StringField(BLAZE_PARTICLE.name, BLAZE_PARTICLE.description, "minecraft:flame"),
                         new StringField(ENDERMAN_PARTICLE.name, ENDERMAN_PARTICLE.description, "minecraft:block minecraft:purple_concrete"),
                         new StringField(ENDER_DRAGON_PARTICLE.name, ENDERMAN_PARTICLE.description, "minecraft:block minecraft:purple_concrete"),
                         new StringField(MAGMA_CUBE_PARTICLE.name, MAGMA_CUBE_PARTICLE.description, "minecraft:block minecraft:magma_block"),
@@ -106,6 +110,30 @@ public class BloodParticlesClientMod implements ClientModInitializer {
             logger = LogManager.getLogger("Blood Particles");
 
         return logger;
+    }
+
+    /**
+     * Return the blood particle effect for a specific entity type
+     *
+     * @param type The entity type which will bleed
+     * @return The blood particle effect of the entity
+     */
+    public static ParticleEffect getBloodParticleEffect(EntityType<?> type) {
+        String id = Registry.ENTITY_TYPE.getId(type).toString();
+
+        String particle = (String) config.getFieldByName(id).getValue(); // No worries! You can cast null to any reference
+        if (particle == null)
+            particle = (String) config.getFieldByName(DEFAULT_PARTICLE.name).getValue();
+
+        ParticleType<?> particleType = Registry.PARTICLE_TYPE.get(Identifier.tryParse(particle.split(" ")[0]));
+        if (particle.split(" ").length == 2) {
+            Identifier particleId = Identifier.tryParse(particle.split(" ")[1]); // This is required for block or item id
+            if (particleType == ParticleTypes.BLOCK)
+                return new BlockStateParticleEffect(ParticleTypes.BLOCK, Registry.BLOCK.get(particleId).getDefaultState());
+            else if (particleType == ParticleTypes.ITEM)
+                return new ItemStackParticleEffect(ParticleTypes.ITEM, Registry.ITEM.get(particleId).getDefaultStack());
+        }
+        return (ParticleEffect) particleType;
     }
 
     /**
