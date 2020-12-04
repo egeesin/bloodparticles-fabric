@@ -80,9 +80,9 @@ public class Configuration {
                     continue; // There is no such field that we know
 
                 String value = line.split("=")[1].trim();
-                if (String.valueOf(true).equalsIgnoreCase(value) || String.valueOf(false).equalsIgnoreCase(value)) {
+                if (String.valueOf(true).equalsIgnoreCase(value) || String.valueOf(false).equalsIgnoreCase(value))
                     ((BooleanField) field).changeValue(Boolean.parseBoolean(value)); // If the value is true or false, use BooleanField to check actual one later
-                } else
+                else
                     try {
                         double parseDouble = Double.parseDouble(value); // We are looking for a NumberFormatException here
                         ((DoubleField) field).changeValue(Double.parseDouble(value)); // Then casting field as DoubleField to be sure
