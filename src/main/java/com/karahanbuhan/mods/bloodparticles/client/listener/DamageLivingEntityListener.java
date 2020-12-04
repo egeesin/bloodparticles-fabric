@@ -29,7 +29,7 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
     public ActionResult interact(LivingEntity entity, DamageSource source, float amount) {
         Configuration config = BloodParticlesClientMod.getConfig();
 
-        if (!getEnabledDamageSources(config).contains(source.name))
+        if (!isDamageSourceEnabled(source.name, config))
             return ActionResult.PASS; // Return if the damage source is not enabled in config
 
         WorldRenderer renderer = MinecraftClient.getInstance().worldRenderer;
@@ -43,12 +43,13 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
     }
 
     /**
-     * Returns the enabled damage sources in config
+     * Checks if a damage source is enabled
      *
+     * @param source The source that will be checked if is enabled
      * @param config The configuration for enabled causes
-     * @return Set of enabled damage sources
+     * @return Whether the damage source is enabled or not
      */
-    private HashSet<String> getEnabledDamageSources(Configuration config) {
+    private boolean isDamageSourceEnabled(String source, Configuration config) {
         HashMultimap<ReferenceVariables, String> map = HashMultimap.create(); // There may be duplicate keys so we use Multimap
         map.put(BLOOD_WHEN_ATTACK, "string");
         map.put(BLOOD_WHEN_ATTACK, "mob");
@@ -83,11 +84,10 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         map.put(BLOOD_WHEN_VOID, "outOfWorld");
         map.put(BLOOD_WHEN_WITHER, "wither");
 
-        HashSet<String> enabledDamageSources = new HashSet<>();
         for (Map.Entry<ReferenceVariables, String> entry : map.entries())
             if ((Boolean) config.getFieldByName(entry.getKey().name).getValue())
-                enabledDamageSources.add(entry.getValue()); // If the reference is enabled, add it's value which are in map object
+                return true; // Return true if the reference is enabled
 
-        return enabledDamageSources;
+        return false;
     }
 }
