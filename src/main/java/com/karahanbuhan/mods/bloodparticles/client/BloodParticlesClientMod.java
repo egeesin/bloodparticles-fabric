@@ -1,5 +1,6 @@
 package com.karahanbuhan.mods.bloodparticles.client;
 
+import com.google.common.collect.HashMultimap;
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
 import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static com.karahanbuhan.mods.bloodparticles.client.ReferenceVariables.*;
 
@@ -104,5 +106,80 @@ public class BloodParticlesClientMod implements ClientModInitializer {
             logger = LogManager.getLogger("Blood Particles");
 
         return logger;
+    }
+
+    /**
+     * Returns the blood multiplier
+     *
+     * @return Blood multiplier as double type
+     */
+    public static double getBloodMultiplier() {
+        return ((Double) config.getFieldByName(BLOOD_MULTIPLIER.name).getValue());
+    }
+
+    /**
+     * Returns the particle limit
+     *
+     * @return Maximum particle limit as double type
+     */
+    public static double getParticleLimit() {
+        return ((Double) config.getFieldByName(PARTICLE_LIMIT.name).getValue());
+    }
+
+    /**
+     * Checks if particles are enabled
+     *
+     * @return Whether the particles are enabled or not
+     */
+    public static boolean isEnabled() {
+        return ((Boolean) config.getFieldByName(IS_ENABLED.name).getValue());
+    }
+
+    /**
+     * Checks if a damage source is enabled
+     *
+     * @param source The source that will be checked if is enabled
+     * @return Whether the damage source is enabled or not
+     */
+    public static boolean isDamageSourceEnabled(String source) {
+        HashMultimap<ReferenceVariables, String> map = HashMultimap.create(); // There may be duplicate keys so we use Multimap
+        map.put(BLOOD_WHEN_ATTACK, "string");
+        map.put(BLOOD_WHEN_ATTACK, "mob");
+        map.put(BLOOD_WHEN_ATTACK, "player");
+        map.put(BLOOD_WHEN_CACTUS, "cactus");
+        map.put(BLOOD_WHEN_CRAMMING, "cramming");
+        map.put(BLOOD_WHEN_CUSTOM_DAMAGE, "generic"); // Not sure about this one...
+        map.put(BLOOD_WHEN_DRAGON_BREATH, "dragonBreath");
+        map.put(BLOOD_WHEN_DROWNING, "drown");
+        map.put(BLOOD_WHEN_DRYOUT, "dryout");
+        map.put(BLOOD_WHEN_EXPLOSION, "explosion");
+        map.put(BLOOD_WHEN_EXPLOSION, "explosion.player");
+        map.put(BLOOD_WHEN_FALL, "fall");
+        map.put(BLOOD_WHEN_FIRE, "inFire");
+        map.put(BLOOD_WHEN_FIRE, "onFire");
+        map.put(BLOOD_WHEN_FLY_INTO_WALL, "flyIntoWall");
+        map.put(BLOOD_WHEN_HOT_FLOOR, "hotFloor");
+        map.put(BLOOD_WHEN_LAVA, "lava");
+        map.put(BLOOD_WHEN_LIGHTNING, "lightningBolt");
+        map.put(BLOOD_WHEN_MAGIC, "magic");
+        map.put(BLOOD_WHEN_POISON, "poison");
+        map.put(BLOOD_WHEN_PROJECTILE, "arrow");
+        map.put(BLOOD_WHEN_PROJECTILE, "trident");
+        map.put(BLOOD_WHEN_PROJECTILE, "fireworks");
+        map.put(BLOOD_WHEN_PROJECTILE, "fireball");
+        map.put(BLOOD_WHEN_PROJECTILE, "witherSkull");
+        map.put(BLOOD_WHEN_PROJECTILE, "thrown");
+        map.put(BLOOD_WHEN_PROJECTILE, "indirectMagic");
+        map.put(BLOOD_WHEN_STARVATION, "starve");
+        map.put(BLOOD_WHEN_SUFFOCATION, "fallingBlock");
+        map.put(BLOOD_WHEN_THORNS, "thorns");
+        map.put(BLOOD_WHEN_VOID, "outOfWorld");
+        map.put(BLOOD_WHEN_WITHER, "wither");
+
+        for (Map.Entry<ReferenceVariables, String> entry : map.entries())
+            if ((Boolean) config.getFieldByName(entry.getKey().name).getValue())
+                return true; // Return true if the reference is enabled
+
+        return false;
     }
 }
