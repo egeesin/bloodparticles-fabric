@@ -8,8 +8,10 @@ import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.*;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
@@ -121,9 +123,12 @@ public class BloodParticlesClientMod implements ClientModInitializer {
     public static ParticleEffect getBloodParticleEffect(EntityType<?> type) {
         String id = Registry.ENTITY_TYPE.getId(type).toString();
 
-        String particle = (String) config.getFieldByName(id).getValue(); // No worries! You can cast null to any reference
-        if (particle == null)
+        StringField particleField = (StringField) config.getFieldByName(id);
+        String particle;
+        if (particleField == null)
             particle = (String) config.getFieldByName(DEFAULT_PARTICLE.name).getValue();
+        else
+            particle = particleField.getValue();
 
         ParticleType<?> particleType = Registry.PARTICLE_TYPE.get(Identifier.tryParse(particle.split(" ")[0]));
         if (particle.split(" ").length == 2) {
@@ -205,7 +210,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_WITHER, "wither");
 
         for (Map.Entry<ReferenceVariables, String> entry : map.entries())
-            if ((Boolean) config.getFieldByName(entry.getKey().name).getValue())
+            if (entry.getValue().equals(source) && (Boolean) config.getFieldByName(entry.getKey().name).getValue())
                 return true; // Return true if the reference is enabled
 
         return false;
