@@ -19,6 +19,9 @@ import net.minecraft.util.math.Vec3d;
 public class DamageLivingEntityListener implements DamageLivingEntityCallback {
     @Override
     public ActionResult interact(LivingEntity entity, DamageSource source, float amount) {
+        if (amount == 0.0)
+            return ActionResult.PASS; // Return if the damage is 0.0
+
         if (BloodParticlesClientMod.isEnabled())
             return ActionResult.PASS; // Return if the particles are not enabled
 
