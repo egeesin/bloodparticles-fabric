@@ -8,6 +8,7 @@ public enum ReferenceVariables {
     BLOOD_MULTIPLIER("blood_multiplier", "The multiplier for how much blood particle will spawn per damage."),
     PARTICLE_LIMIT("particle_limit", "Maximum particle limit. If you are experiencing FPS problems, you can lower it."),
 
+    BLOOD_WHEN_ANVIL("blood_when_anvil", "Whether there should be blood particles when an anvil damages entity."),
     BLOOD_WHEN_ATTACK("blood_when_attack", "Whether there should be blood particles when an entity got attacked."),
     BLOOD_WHEN_CACTUS("blood_when_cactus", "Whether there should be blood particles when an entity contacts a cactus."),
     BLOOD_WHEN_CRAMMING("blood_when_cramming", "Whether there should be blood particles when an entity is cramming."),
@@ -27,6 +28,7 @@ public enum ReferenceVariables {
     BLOOD_WHEN_PROJECTILE("blood_when_projectile", "Whether there should be blood particles when an entity is hit by a projectile."),
     BLOOD_WHEN_STARVATION("blood_when_starvation", "Whether there should be blood particles when an entity is on starving"),
     BLOOD_WHEN_SUFFOCATION("blood_when_suffocation", "Whether there should be blood particles when an entity suffocate."),
+    BLOOD_WHEN_BERRY_BUSH("blood_when_berry_bush", "Whether there should be blood particles when an entity contacts a sweet berry bush."),
     BLOOD_WHEN_THORNS("blood_when_thorns", "Whether there should be blood particles when an entity is attacked by thorns enchantment."),
     BLOOD_WHEN_VOID("blood_when_void", "Whether there should be blood particles when an entity is falling into the void."),
     BLOOD_WHEN_WITHER("blood_when_wither", "Whether there should be blood particles when an entity is withered."),

@@ -59,6 +59,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new DoubleField(BLOOD_MULTIPLIER.name, BLOOD_MULTIPLIER.description, 15.0),
                         new DoubleField(PARTICLE_LIMIT.name, PARTICLE_LIMIT.description, 1250.0),
 
+                        new BooleanField(BLOOD_WHEN_ANVIL.name, BLOOD_WHEN_ANVIL.description, true),
                         new BooleanField(BLOOD_WHEN_ATTACK.name, BLOOD_WHEN_ATTACK.description, true),
                         new BooleanField(BLOOD_WHEN_CACTUS.name, BLOOD_WHEN_CACTUS.description, true),
                         new BooleanField(BLOOD_WHEN_CRAMMING.name, BLOOD_WHEN_CRAMMING.description, true),
@@ -78,6 +79,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new BooleanField(BLOOD_WHEN_PROJECTILE.name, BLOOD_WHEN_PROJECTILE.description, true),
                         new BooleanField(BLOOD_WHEN_STARVATION.name, BLOOD_WHEN_STARVATION.description, false),
                         new BooleanField(BLOOD_WHEN_SUFFOCATION.name, BLOOD_WHEN_SUFFOCATION.description, false),
+                        new BooleanField(BLOOD_WHEN_BERRY_BUSH.name, BLOOD_WHEN_BERRY_BUSH.description, true),
                         new BooleanField(BLOOD_WHEN_THORNS.name, BLOOD_WHEN_THORNS.description, true),
                         new BooleanField(BLOOD_WHEN_VOID.name, BLOOD_WHEN_VOID.description, false),
                         new BooleanField(BLOOD_WHEN_WITHER.name, BLOOD_WHEN_WITHER.description, true),
@@ -174,6 +176,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      */
     public static boolean isDamageSourceEnabled(String source) {
         HashMultimap<ReferenceVariables, String> map = HashMultimap.create(); // There may be duplicate keys so we use Multimap
+        map.put(BLOOD_WHEN_ANVIL, "anvil");
         map.put(BLOOD_WHEN_ATTACK, "sting");
         map.put(BLOOD_WHEN_ATTACK, "mob");
         map.put(BLOOD_WHEN_ATTACK, "player");
@@ -203,6 +206,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_PROJECTILE, "indirectMagic");
         map.put(BLOOD_WHEN_STARVATION, "starve");
         map.put(BLOOD_WHEN_SUFFOCATION, "fallingBlock");
+        map.put(BLOOD_WHEN_BERRY_BUSH, "sweetBerryBush");
         map.put(BLOOD_WHEN_THORNS, "thorns");
         map.put(BLOOD_WHEN_VOID, "outOfWorld");
         map.put(BLOOD_WHEN_WITHER, "wither");
