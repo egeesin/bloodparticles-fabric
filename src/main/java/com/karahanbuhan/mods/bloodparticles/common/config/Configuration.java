@@ -85,7 +85,7 @@ public class Configuration {
                 else
                     try {
                         double parseDouble = Double.parseDouble(value); // We are looking for a NumberFormatException here
-                        ((DoubleField) field).changeValue(Double.parseDouble(value)); // Then casting field as DoubleField to be sure
+                        ((DoubleField) field).changeValue(parseDouble); // Then casting field as DoubleField to be sure
                     } catch (NumberFormatException e) {
                         // This block will be called if value is not both boolean and double so we will treat it like a string
                         // Maybe we can add more data types if we need them in future
