@@ -54,6 +54,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new DoubleField(PARTICLE_LIMIT.name, PARTICLE_LIMIT.description, 1250.0),
 
                         new BooleanField(BLOOD_WHEN_ATTACK.name, BLOOD_WHEN_ATTACK.description, true),
+                        new BooleanField(BLOOD_WHEN_CACTUS.name, BLOOD_WHEN_CACTUS.description, true),
                         new BooleanField(BLOOD_WHEN_CRAMMING.name, BLOOD_WHEN_CRAMMING.description, true),
                         new BooleanField(BLOOD_WHEN_CUSTOM_DAMAGE.name, BLOOD_WHEN_CUSTOM_DAMAGE.description, true),
                         new BooleanField(BLOOD_WHEN_DRAGON_BREATH.name, BLOOD_WHEN_DRAGON_BREATH.description, false),

@@ -9,6 +9,7 @@ public enum ReferenceVariables {
     PARTICLE_LIMIT("particle_limit", "Maximum particle limit. If you are experiencing FPS problems, you can lower it."),
 
     BLOOD_WHEN_ATTACK("blood_when_attack", "Whether there should be blood particles when an entity got attacked."),
+    BLOOD_WHEN_CACTUS("blood_when_cactus", "Whether there should be blood particles when an entity contacts a cactus."),
     BLOOD_WHEN_CRAMMING("blood_when_cramming", "Whether there should be blood particles when an entity is cramming."),
     BLOOD_WHEN_CUSTOM_DAMAGE("blood_when_custom_damage", "Whether there should be blood particles when custom damage applied."),
     BLOOD_WHEN_DRAGON_BREATH("blood_when_dragon_breath", "Whether there should be blood particles when dragon breath damage."),
