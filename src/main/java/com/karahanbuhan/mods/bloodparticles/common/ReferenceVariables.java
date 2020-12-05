@@ -1,4 +1,4 @@
-package com.karahanbuhan.mods.bloodparticles.client;
+package com.karahanbuhan.mods.bloodparticles.common;
 
 /**
  * Reference variables to get values in config

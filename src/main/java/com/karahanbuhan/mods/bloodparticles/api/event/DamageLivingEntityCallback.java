@@ -1,6 +1,6 @@
 package com.karahanbuhan.mods.bloodparticles.api.event;
 
-import com.karahanbuhan.mods.bloodparticles.mixin.event.DamageLivingEntityMixin;
+import com.karahanbuhan.mods.bloodparticles.mixin.DamageLivingEntityMixin;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.LivingEntity;

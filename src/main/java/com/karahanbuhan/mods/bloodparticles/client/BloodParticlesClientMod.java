@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
 import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
+import com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
@@ -18,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.karahanbuhan.mods.bloodparticles.client.ReferenceVariables.*;
+import static com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables.*;
 
 /**
  * Represents the Blood Particles core

@@ -1,4 +1,4 @@
-package com.karahanbuhan.mods.bloodparticles.mixin.event;
+package com.karahanbuhan.mods.bloodparticles.mixin;
 
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import net.minecraft.entity.LivingEntity;
