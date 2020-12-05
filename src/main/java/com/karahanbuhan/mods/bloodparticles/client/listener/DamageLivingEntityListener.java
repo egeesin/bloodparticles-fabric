@@ -25,16 +25,21 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         if (!BloodParticlesClientMod.isDamageSourceEnabled(source.name))
             return ActionResult.PASS; // Return if the damage source is not enabled in config
 
-        // Did you know that dust particles crash the game?
+        MinecraftClient client = MinecraftClient.getInstance();
+
+        // Did you know that dust particles would crash the game in this line?
         ParticleEffect particleEffect = BloodParticlesClientMod.getBloodParticleEffect(entity.getType());
 
-        // If multiplier times amount exceeds limit, use the particle limit
-        double particleAmount = Math.min(BloodParticlesClientMod.getBloodMultiplier() * amount, BloodParticlesClientMod.getParticleLimit());
+        // Store particle amount so we do not break the world renderer
+        double particleAmount = Integer.parseInt(client.particleManager.getDebugString());
+
+        // If multiplier times amount exceeds limit, use the particle limit - total particles
+        double bloodParticleAmount = Math.min(BloodParticlesClientMod.getBloodMultiplier() * amount, BloodParticlesClientMod.getParticleLimit() - particleAmount);
 
         WorldRenderer renderer = MinecraftClient.getInstance().worldRenderer;
         Vec3d pos = entity.getPos().add(0, entity.getHeight() / 1.5, 0); // We add to y for almost centering blood vertically
 
-        for (int i = 0; i < particleAmount; i++)
+        for (int i = 0; i < bloodParticleAmount; i++)
             renderer.addParticle(particleEffect, false, pos.x, pos.y, pos.z, 0, 0, 0);
 
         return ActionResult.PASS;
