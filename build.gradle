@@ -11,7 +11,10 @@ version = project.mod_version
 group = project.maven_group
 
 dependencies {
-    compileOnly 'org.jetbrains:annotations:15.0' // This is required for GUI annotation
+    // These two are required for GUI annotations without them build fails
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'org.jetbrains:annotations:15.0'
+
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
