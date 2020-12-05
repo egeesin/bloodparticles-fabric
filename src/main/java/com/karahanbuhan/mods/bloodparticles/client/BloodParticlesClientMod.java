@@ -103,6 +103,17 @@ public class BloodParticlesClientMod implements ClientModInitializer {
     }
 
     /**
+     * Saves the fields into configuration file
+     */
+    public static void saveConfig() {
+        try {
+            config.write();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Returns the mod logger associated with the client
      *
      * @return Logger associated with this mod

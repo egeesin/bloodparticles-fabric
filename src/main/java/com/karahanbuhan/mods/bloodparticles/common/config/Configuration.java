@@ -9,13 +9,12 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * Represents the configuration
  */
 public class Configuration {
-    private final Set<BaseField> fieldSet = new LinkedHashSet<>();
+    private final LinkedHashSet<BaseField> fieldSet = new LinkedHashSet<>();
 
     /**
      * Gets the field by it's name, it returns null if there is no field with such name
@@ -28,6 +27,15 @@ public class Configuration {
                 .filter(field -> field.getName().equals(name))
                 .findFirst()
                 .orElse(null);
+    }
+
+    /**
+     * Gets all the fields that exist on config
+     *
+     * @return All the fields stored
+     */
+    public LinkedHashSet<BaseField> getFieldSet() {
+        return fieldSet;
     }
 
     private final File file;
@@ -59,7 +67,7 @@ public class Configuration {
     public Configuration load() {
         if (!file.exists())
             try {
-                writeDefaultConfig();
+                write();
             } catch (IOException e) {
                 throw new RuntimeException("Could not write default configuration file");
             }
@@ -100,9 +108,11 @@ public class Configuration {
     }
 
     /**
-     * Copies the given default fields if they do not exist in configuration
+     * Writes the existing fields into configuration file
+     *
+     * @throws IOException If can not create parent directory or the parent file is not a directory
      */
-    private void writeDefaultConfig() throws IOException {
+    public void write() throws IOException {
         File dir = file.getParentFile();
 
         if (!dir.exists()) {

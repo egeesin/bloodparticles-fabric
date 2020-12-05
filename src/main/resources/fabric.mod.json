@@ -8,15 +8,20 @@
     "Karahan Buhan"
   ],
   "contact": {
+    "email": "contact@karahanbuhan.com",
     "homepage": "https://karahanbuhan.com",
+    "issues": "https://github.com/karahanbuhan/bloodparticles-fabric/issues",
     "sources": "https://github.com/karahanbuhan/bloodparticles-fabric"
   },
   "license": "LGPL-3.0-only",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/bloodparticles/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
       "com.karahanbuhan.mods.bloodparticles.client.BloodParticlesClientMod"
+    ],
+    "modmenu": [
+      "com.karahanbuhan.mods.bloodparticles.client.BloodParticlesModMenu"
     ]
   },
   "depends": {
