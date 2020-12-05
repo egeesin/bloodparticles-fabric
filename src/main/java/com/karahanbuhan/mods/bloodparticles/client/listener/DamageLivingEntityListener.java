@@ -34,7 +34,12 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         double particleAmount = Integer.parseInt(client.particleManager.getDebugString());
 
         // If multiplier times amount exceeds limit, use the particle limit - total particles
-        double bloodParticleAmount = Math.min(BloodParticlesClientMod.getBloodMultiplier() * amount, BloodParticlesClientMod.getParticleLimit() - particleAmount);
+        double bloodParticleAmount = BloodParticlesClientMod.getBloodMultiplier() * amount;
+
+        // Hard coded vanilla particle limit is 16384 so if config value exceeds it, use it instead
+        double particleLimit = BloodParticlesClientMod.getParticleLimit();
+        if (particleAmount + bloodParticleAmount >= (particleLimit >= 16384 ? 16384 : particleLimit))
+            return ActionResult.PASS; // Return if particles will exceed the limit
 
         WorldRenderer renderer = MinecraftClient.getInstance().worldRenderer;
         Vec3d pos = entity.getPos().add(0, entity.getHeight() / 1.5, 0); // We add to y for almost centering blood vertically
