@@ -3,13 +3,12 @@ package com.karahanbuhan.mods.bloodparticles.client;
 import com.google.common.collect.HashMultimap;
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
-import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
 import com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables;
+import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.*;
 import net.minecraft.util.Identifier;
@@ -59,7 +58,6 @@ public class BloodParticlesClientMod implements ClientModInitializer {
 
                         new BooleanField(IS_ENABLED.name, IS_ENABLED.description, true),
                         new DoubleField(BLOOD_MULTIPLIER.name, BLOOD_MULTIPLIER.description, 15.0),
-                        new DoubleField(PARTICLE_LIMIT.name, PARTICLE_LIMIT.description, 1250.0),
 
                         new BooleanField(BLOOD_WHEN_ANVIL.name, BLOOD_WHEN_ANVIL.description, true),
                         new BooleanField(BLOOD_WHEN_ATTACK.name, BLOOD_WHEN_ATTACK.description, true),
@@ -161,15 +159,6 @@ public class BloodParticlesClientMod implements ClientModInitializer {
      */
     public static double getBloodMultiplier() {
         return ((Double) config.getFieldByName(BLOOD_MULTIPLIER.name).getValue());
-    }
-
-    /**
-     * Returns the particle limit
-     *
-     * @return Maximum particle limit as double type
-     */
-    public static double getParticleLimit() {
-        return ((Double) config.getFieldByName(PARTICLE_LIMIT.name).getValue());
     }
 
     /**

@@ -6,7 +6,6 @@ package com.karahanbuhan.mods.bloodparticles.common;
 public enum ReferenceVariables {
     IS_ENABLED("enabled", "Whether the blood particles are enabled or not."),
     BLOOD_MULTIPLIER("blood_multiplier", "The multiplier for how much blood particle will spawn per damage."),
-    PARTICLE_LIMIT("particle_limit", "Maximum particle limit. If you are experiencing FPS problems, you can lower it."),
 
     BLOOD_WHEN_ANVIL("blood_when_anvil", "Whether there should be blood particles when an anvil damages entity."),
     BLOOD_WHEN_ATTACK("blood_when_attack", "Whether there should be blood particles when an entity got attacked."),
