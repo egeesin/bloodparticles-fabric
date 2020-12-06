@@ -9,6 +9,7 @@ import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.*;
 import net.minecraft.util.Identifier;
@@ -217,6 +218,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_PROJECTILE, "thrown");
         map.put(BLOOD_WHEN_PROJECTILE, "indirectMagic");
         map.put(BLOOD_WHEN_STARVATION, "starve");
+        map.put(BLOOD_WHEN_SUFFOCATION, "inWall");
         map.put(BLOOD_WHEN_SUFFOCATION, "fallingBlock");
         map.put(BLOOD_WHEN_BERRY_BUSH, "sweetBerryBush");
         map.put(BLOOD_WHEN_THORNS, "thorns");
