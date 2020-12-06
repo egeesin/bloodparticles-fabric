@@ -23,7 +23,6 @@ public enum ReferenceVariables {
     BLOOD_WHEN_LAVA("blood_when_lava", "Whether there should be blood particles when an entity is on lava."),
     BLOOD_WHEN_LIGHTNING("blood_when_lightning", "Whether there should be blood particles when an entity is struck by lightning."),
     BLOOD_WHEN_MAGIC("blood_when_magic", "Whether there should be blood particles when an entity is hit by damage potion or spell."),
-    BLOOD_WHEN_POISON("blood_when_poison", "Whether there should be blood particles when an entity is poisoned."),
     BLOOD_WHEN_PROJECTILE("blood_when_projectile", "Whether there should be blood particles when an entity is hit by a projectile."),
     BLOOD_WHEN_STARVATION("blood_when_starvation", "Whether there should be blood particles when an entity is on starving"),
     BLOOD_WHEN_SUFFOCATION("blood_when_suffocation", "Whether there should be blood particles when an entity suffocate."),

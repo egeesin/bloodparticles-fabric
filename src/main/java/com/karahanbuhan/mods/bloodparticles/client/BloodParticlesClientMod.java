@@ -75,7 +75,6 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new BooleanField(BLOOD_WHEN_LAVA.name, BLOOD_WHEN_LAVA.description, false),
                         new BooleanField(BLOOD_WHEN_LIGHTNING.name, BLOOD_WHEN_LIGHTNING.description, false),
                         new BooleanField(BLOOD_WHEN_MAGIC.name, BLOOD_WHEN_MAGIC.description, false),
-                        new BooleanField(BLOOD_WHEN_POISON.name, BLOOD_WHEN_POISON.description, false),
                         new BooleanField(BLOOD_WHEN_PROJECTILE.name, BLOOD_WHEN_PROJECTILE.description, true),
                         new BooleanField(BLOOD_WHEN_STARVATION.name, BLOOD_WHEN_STARVATION.description, false),
                         new BooleanField(BLOOD_WHEN_SUFFOCATION.name, BLOOD_WHEN_SUFFOCATION.description, false),
@@ -198,7 +197,6 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_LAVA, "lava");
         map.put(BLOOD_WHEN_LIGHTNING, "lightningBolt");
         map.put(BLOOD_WHEN_MAGIC, "magic");
-        map.put(BLOOD_WHEN_POISON, "poison");
         map.put(BLOOD_WHEN_PROJECTILE, "arrow");
         map.put(BLOOD_WHEN_PROJECTILE, "trident");
         map.put(BLOOD_WHEN_PROJECTILE, "fireworks");
