@@ -8,7 +8,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.time.Instant;
+
 /**
  * Mixin class for injecting {@link DamageLivingEntityCallback} into ClientPlayerInteractionManager on entityAttack()
  */
@@ -27,8 +28,8 @@ public abstract class ClientAttackEntityMixin {
     @Inject(method = "attackEntity(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/entity/Entity;)V", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/entity/player/PlayerEntity;attack(Lnet/minecraft/entity/Entity;)V"))
     @Environment(EnvType.CLIENT)
-    private void onAttackEntity(PlayerEntity player, Entity entity, CallbackInfo ci) {
-        if (!(entity instanceof LivingEntity) || MinecraftClient.getInstance().isInSingleplayer())
+    private void onAttackEntity(PlayerEntity player, Entity target, CallbackInfo ci) {
+        if (!(target instanceof LivingEntity) || MinecraftClient.getInstance().isInSingleplayer())
             return;
 
         float amount = 1.0f;
@@ -41,8 +42,7 @@ public abstract class ClientAttackEntityMixin {
                 amount = ((SwordItem) item).getAttackDamage();
         }
 
-        DamageLivingEntityCallback.EVENT.invoker().interact((LivingEntity) entity, DamageSource.player(player), amount);
-        MixinVariables.clientAttacked = true;
+        MixinVariables.lastAttackData = new MixinVariables.AttackData(player, (LivingEntity) target, Instant.now().getEpochSecond(), amount);
     }
 
 }

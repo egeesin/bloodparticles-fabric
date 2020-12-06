@@ -22,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.time.Instant;
+
 /**
  * Mixin class for injecting {@link DamageLivingEntityCallback} into LivingEntity on damage()
  */
@@ -43,8 +45,9 @@ public abstract class DamageLivingEntityMixin {
         if (MinecraftClient.getInstance().isInSingleplayer())
             return;
 
-        if (MixinVariables.clientAttacked) {
-            MixinVariables.clientAttacked = false;
+        MixinVariables.AttackData data = MixinVariables.lastAttackData;
+        if (!data.handled && !data.isOutdated()) {
+            DamageLivingEntityCallback.EVENT.invoker().interact(entity, DamageSource.player(data.player), data.amount);
             return;
         }
 
