@@ -19,6 +19,11 @@ public class BooleanField extends BaseField {
     }
 
     @Override
+    public Boolean getDefaultValue() {
+        return (Boolean) super.getDefaultValue();
+    }
+
+    @Override
     public Boolean getValue() {
         return (Boolean) super.getValue();
     }

@@ -7,7 +7,6 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -15,15 +14,15 @@ import net.minecraft.util.math.Vec3d;
  */
 public class DamageLivingEntityListener implements DamageLivingEntityCallback {
     @Override
-    public ActionResult interact(LivingEntity entity, DamageSource source, float amount) {
-        if (amount == 0.0)
-            return ActionResult.PASS;
+    public void interact(LivingEntity entity, DamageSource source, float amount) {
+        if (amount <= 0.0f)
+            return; // Return if the damage is less than 0
 
         if (!BloodParticlesClientMod.isEnabled())
-            return ActionResult.PASS; // Return if the particles are not enabled
+            return; // Return if the particles are not enabled
 
         if (!BloodParticlesClientMod.isDamageSourceEnabled(source.name))
-            return ActionResult.PASS; // Return if the damage source is not enabled in config
+            return; // Return if the damage source is not enabled in config
 
         MinecraftClient client = MinecraftClient.getInstance();
 
@@ -36,17 +35,14 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         // If multiplier times amount exceeds limit, use the particle limit - total particles
         double bloodParticleAmount = BloodParticlesClientMod.getBloodMultiplier() * amount;
 
-        // Hard coded vanilla particle limit is 16384 so if config value exceeds it, use it instead
-        double particleLimit = BloodParticlesClientMod.getParticleLimit();
-        if (particleAmount + bloodParticleAmount >= (particleLimit >= 16384 ? 16384 : particleLimit))
-            return ActionResult.PASS; // Return if particles will exceed the limit
+        // Hard coded vanilla particle limit is 16384 but we are using 12288 for safety measurements
+        if (particleAmount + bloodParticleAmount >= 12288)
+            return; // Return if total particle amount is higher than the limit
 
         WorldRenderer renderer = MinecraftClient.getInstance().worldRenderer;
         Vec3d pos = entity.getPos().add(0, entity.getHeight() / 1.5, 0); // We add to y for almost centering blood vertically
 
         for (int i = 0; i < bloodParticleAmount; i++)
             renderer.addParticle(particleEffect, false, pos.x, pos.y, pos.z, 0, 0, 0);
-
-        return ActionResult.PASS;
     }
 }
