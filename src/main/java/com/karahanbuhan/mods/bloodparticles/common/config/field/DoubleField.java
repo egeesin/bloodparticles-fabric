@@ -19,11 +19,6 @@ public class DoubleField extends BaseField {
     }
 
     @Override
-    public Double getDefaultValue() {
-        return (Double) super.getDefaultValue();
-    }
-
-    @Override
     public Double getValue() {
         return (Double) super.getValue();
     }
