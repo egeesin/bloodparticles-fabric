@@ -2,7 +2,7 @@ package com.karahanbuhan.mods.bloodparticles.client;
 
 import com.google.common.collect.HashMultimap;
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
-import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
+import com.karahanbuhan.mods.bloodparticles.common.listener.DamageLivingEntityListener;
 import com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables;
 import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;

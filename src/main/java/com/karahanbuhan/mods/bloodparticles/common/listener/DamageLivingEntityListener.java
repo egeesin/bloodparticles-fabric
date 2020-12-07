@@ -1,12 +1,13 @@
-package com.karahanbuhan.mods.bloodparticles.client.listener;
+package com.karahanbuhan.mods.bloodparticles.common.listener;
 
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import com.karahanbuhan.mods.bloodparticles.client.BloodParticlesClientMod;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -26,6 +27,9 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
 
         MinecraftClient client = MinecraftClient.getInstance();
 
+        if (client.world == null)
+            return; // Return if the world is null for some reason
+
         // Did you know that dust particles would crash the game in this line?
         ParticleEffect particleEffect = BloodParticlesClientMod.getBloodParticleEffect(entity.getType());
 
@@ -39,10 +43,13 @@ public class DamageLivingEntityListener implements DamageLivingEntityCallback {
         if (particleAmount + bloodParticleAmount >= 12288)
             return; // Return if total particle amount is higher than the limit
 
-        WorldRenderer renderer = MinecraftClient.getInstance().worldRenderer;
         Vec3d pos = entity.getPos().add(0, entity.getHeight() / 1.5, 0); // We add to y for almost centering blood vertically
 
-        for (int i = 0; i < bloodParticleAmount; i++)
-            renderer.addParticle(particleEffect, false, pos.x, pos.y, pos.z, 0, 0, 0);
+        ParticleS2CPacket packet = new ParticleS2CPacket(particleEffect, false, pos.x, pos.y, pos.z, 0, 0, 0, 1.0f, (int) bloodParticleAmount);
+        if (client.isInSingleplayer()) {
+            ServerPlayerEntity serverPlayer = client.getServer().getPlayerManager().getPlayerList().get(0);
+            serverPlayer.networkHandler.sendPacket(packet);
+        } else
+            client.getNetworkHandler().onParticle(packet);
     }
 }
