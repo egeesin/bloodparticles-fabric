@@ -46,7 +46,7 @@ public abstract class DamageLivingEntityMixin {
             return;
 
         MixinVariables.AttackData data = MixinVariables.lastAttackData;
-        if (!data.handled && !data.isOutdated()) {
+        if (data != null && !data.handled && !data.isOutdated()) {
             DamageLivingEntityCallback.EVENT.invoker().interact(entity, DamageSource.player(data.player), data.amount);
             return;
         }
