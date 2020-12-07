@@ -8,8 +8,7 @@ import java.util.Objects;
 public abstract class BaseField {
     private final String name;
     private final String description;
-    private final Object defaultValue;
-    
+
     private Object value;
 
     /**
@@ -18,7 +17,6 @@ public abstract class BaseField {
     protected BaseField(String name, String description, Object value) {
         this.name = name;
         this.description = description;
-        this.defaultValue = value;
 
         changeValue(value);
     }
@@ -63,13 +61,6 @@ public abstract class BaseField {
      */
     public String getDescription() {
         return description;
-    }
-
-    /**
-     * Returns the default value stored in this field
-     */
-    public Object getDefaultValue() {
-        return defaultValue;
     }
 
     /**

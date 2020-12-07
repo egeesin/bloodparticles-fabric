@@ -19,11 +19,6 @@ public class StringField extends BaseField {
     }
 
     @Override
-    public String getDefaultValue() {
-        return (String) super.getDefaultValue();
-    }
-
-    @Override
     public String getValue() {
         return (String) super.getValue();
     }

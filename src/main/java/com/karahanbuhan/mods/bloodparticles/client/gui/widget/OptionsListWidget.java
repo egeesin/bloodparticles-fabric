@@ -3,7 +3,6 @@ package com.karahanbuhan.mods.bloodparticles.client.gui.widget;
 import com.google.common.collect.ImmutableList;
 import com.karahanbuhan.mods.bloodparticles.client.BloodParticlesClientMod;
 import com.karahanbuhan.mods.bloodparticles.client.gui.BloodParticlesOptionsScreen;
-import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BaseField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
@@ -54,7 +53,7 @@ public class OptionsListWidget extends ElementListWidget<OptionsListWidget.Entry
     }
 
     public boolean isAnyResetButtonActive() {
-        return entries.stream().anyMatch(entry -> !entry.textField.getText().equals(entry.field.getDefaultValue().toString()));
+        return entries.stream().anyMatch(entry -> !entry.textField.getText().equals(entry.field.getValue().toString()));
     }
 
     public void resetAllFields() {
@@ -105,23 +104,19 @@ public class OptionsListWidget extends ElementListWidget<OptionsListWidget.Entry
             this.textField.setText(field.getValue().toString());
 
             this.resetButton = new ButtonWidget(0, 0, 50, 20, new TranslatableText("bloodparticles.config.buttons.reset"), (button) -> {
-                Configuration config = BloodParticlesClientMod.getConfig();
-
-                textField.setText(field.getDefaultValue().toString());
+                textField.setText(field.getValue().toString());
             });
         }
 
         @Override
         public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-            Configuration config = BloodParticlesClientMod.getConfig();
             TextRenderer textRenderer = OptionsListWidget.this.client.textRenderer;
-
             this.textField.x = x + 75;
             this.textField.y = y + 5;
 
             this.resetButton.x = x + 265;
             this.resetButton.y = y + 5;
-            this.resetButton.active = !this.textField.getText().equals(field.getDefaultValue().toString());
+            this.resetButton.active = !this.textField.getText().equals(field.getValue().toString());
             this.resetButton.render(matrices, mouseX, mouseY, tickDelta);
 
             drawTextWithShadow(matrices, textRenderer, this.key, x - 80, y + 12, 10526880);

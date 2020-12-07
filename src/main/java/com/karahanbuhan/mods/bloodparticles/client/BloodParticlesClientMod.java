@@ -3,8 +3,8 @@ package com.karahanbuhan.mods.bloodparticles.client;
 import com.google.common.collect.HashMultimap;
 import com.karahanbuhan.mods.bloodparticles.api.event.DamageLivingEntityCallback;
 import com.karahanbuhan.mods.bloodparticles.client.listener.DamageLivingEntityListener;
-import com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables;
 import com.karahanbuhan.mods.bloodparticles.common.config.Configuration;
+import com.karahanbuhan.mods.bloodparticles.common.ReferenceVariables;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.BooleanField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.DoubleField;
 import com.karahanbuhan.mods.bloodparticles.common.config.field.StringField;
@@ -58,6 +58,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
 
                         new BooleanField(IS_ENABLED.name, IS_ENABLED.description, true),
                         new DoubleField(BLOOD_MULTIPLIER.name, BLOOD_MULTIPLIER.description, 15.0),
+                        new DoubleField(PARTICLE_LIMIT.name, PARTICLE_LIMIT.description, 1250.0),
 
                         new BooleanField(BLOOD_WHEN_ANVIL.name, BLOOD_WHEN_ANVIL.description, true),
                         new BooleanField(BLOOD_WHEN_ATTACK.name, BLOOD_WHEN_ATTACK.description, true),
@@ -75,6 +76,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
                         new BooleanField(BLOOD_WHEN_LAVA.name, BLOOD_WHEN_LAVA.description, false),
                         new BooleanField(BLOOD_WHEN_LIGHTNING.name, BLOOD_WHEN_LIGHTNING.description, false),
                         new BooleanField(BLOOD_WHEN_MAGIC.name, BLOOD_WHEN_MAGIC.description, false),
+                        new BooleanField(BLOOD_WHEN_POISON.name, BLOOD_WHEN_POISON.description, false),
                         new BooleanField(BLOOD_WHEN_PROJECTILE.name, BLOOD_WHEN_PROJECTILE.description, true),
                         new BooleanField(BLOOD_WHEN_STARVATION.name, BLOOD_WHEN_STARVATION.description, false),
                         new BooleanField(BLOOD_WHEN_SUFFOCATION.name, BLOOD_WHEN_SUFFOCATION.description, false),
@@ -161,6 +163,15 @@ public class BloodParticlesClientMod implements ClientModInitializer {
     }
 
     /**
+     * Returns the particle limit
+     *
+     * @return Maximum particle limit as double type
+     */
+    public static double getParticleLimit() {
+        return ((Double) config.getFieldByName(PARTICLE_LIMIT.name).getValue());
+    }
+
+    /**
      * Checks if particles are enabled
      *
      * @return Whether the particles are enabled or not
@@ -197,6 +208,7 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_LAVA, "lava");
         map.put(BLOOD_WHEN_LIGHTNING, "lightningBolt");
         map.put(BLOOD_WHEN_MAGIC, "magic");
+        map.put(BLOOD_WHEN_POISON, "poison");
         map.put(BLOOD_WHEN_PROJECTILE, "arrow");
         map.put(BLOOD_WHEN_PROJECTILE, "trident");
         map.put(BLOOD_WHEN_PROJECTILE, "fireworks");
@@ -205,7 +217,6 @@ public class BloodParticlesClientMod implements ClientModInitializer {
         map.put(BLOOD_WHEN_PROJECTILE, "thrown");
         map.put(BLOOD_WHEN_PROJECTILE, "indirectMagic");
         map.put(BLOOD_WHEN_STARVATION, "starve");
-        map.put(BLOOD_WHEN_SUFFOCATION, "inWall");
         map.put(BLOOD_WHEN_SUFFOCATION, "fallingBlock");
         map.put(BLOOD_WHEN_BERRY_BUSH, "sweetBerryBush");
         map.put(BLOOD_WHEN_THORNS, "thorns");

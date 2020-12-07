@@ -14,7 +14,7 @@ import java.util.LinkedHashSet;
  * Represents the configuration
  */
 public class Configuration {
-    private LinkedHashSet<BaseField> fieldSet = new LinkedHashSet<>();
+    private final LinkedHashSet<BaseField> fieldSet = new LinkedHashSet<>();
 
     /**
      * Gets the field by it's name, it returns null if there is no field with such name
@@ -44,17 +44,17 @@ public class Configuration {
     /**
      * Initialize a new configuration
      *
-     * @param fileName      The name of the configuration file, do not forget to include file extension
-     * @param header        Header of the configuration file for leaving note as comment
-     * @param defaultFields List of the fields that will be copied
+     * @param fileName The name of the configuration file, do not forget to include file extension
+     * @param header   Header of the configuration file for leaving note as comment
+     * @param fields   List of the fields that will be copied
      * @throws IOException Can be thrown if there is a problem in {@link Configuration#load}
      */
-    public Configuration(String fileName, String header, BaseField... defaultFields) throws IOException {
+    public Configuration(String fileName, String header, BaseField... fields) throws IOException {
         file = new File("config/" + fileName);
 
         this.header = header;
 
-        fieldSet.addAll(Arrays.asList(defaultFields));
+        fieldSet.addAll(Arrays.asList(fields));
 
         load();
     }

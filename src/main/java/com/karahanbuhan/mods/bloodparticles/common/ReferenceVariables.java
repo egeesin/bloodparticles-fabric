@@ -6,6 +6,7 @@ package com.karahanbuhan.mods.bloodparticles.common;
 public enum ReferenceVariables {
     IS_ENABLED("enabled", "Whether the blood particles are enabled or not."),
     BLOOD_MULTIPLIER("blood_multiplier", "The multiplier for how much blood particle will spawn per damage."),
+    PARTICLE_LIMIT("particle_limit", "Maximum particle limit. If you are experiencing FPS problems, you can lower it."),
 
     BLOOD_WHEN_ANVIL("blood_when_anvil", "Whether there should be blood particles when an anvil damages entity."),
     BLOOD_WHEN_ATTACK("blood_when_attack", "Whether there should be blood particles when an entity got attacked."),
@@ -23,6 +24,7 @@ public enum ReferenceVariables {
     BLOOD_WHEN_LAVA("blood_when_lava", "Whether there should be blood particles when an entity is on lava."),
     BLOOD_WHEN_LIGHTNING("blood_when_lightning", "Whether there should be blood particles when an entity is struck by lightning."),
     BLOOD_WHEN_MAGIC("blood_when_magic", "Whether there should be blood particles when an entity is hit by damage potion or spell."),
+    BLOOD_WHEN_POISON("blood_when_poison", "Whether there should be blood particles when an entity is poisoned."),
     BLOOD_WHEN_PROJECTILE("blood_when_projectile", "Whether there should be blood particles when an entity is hit by a projectile."),
     BLOOD_WHEN_STARVATION("blood_when_starvation", "Whether there should be blood particles when an entity is on starving"),
     BLOOD_WHEN_SUFFOCATION("blood_when_suffocation", "Whether there should be blood particles when an entity suffocate."),
